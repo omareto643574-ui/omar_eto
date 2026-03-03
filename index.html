@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <title>OMAR Eto</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>OMAR Eto</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>⚽ OMAR Eto ⚽</h1>
+<!-- صفحة الدخول -->
+<div id="loginPage">
+    <h1>🔥 OMAR Eto 🔥</h1>
+    <input type="text" id="username" placeholder="اسمك">
+    <button onclick="login()">دخول</button>
+</div>
 
-<div class="formation">
+<!-- صفحة اللعبة -->
+<div id="gamePage" style="display:none;">
 
-    <div class="line">
-        <select class="player"><option>ST</option><option>LW</option><option>RW</option><option>CM</option><option>CDM</option><option>CAM</option><option>CB</option><option>RB</option><option>LB</option><option>GK</option></select>
-    </div>
+<h2 id="welcome"></h2>
 
-    <div class="line">
-        <select class="player"></select>
-        <select class="player"></select>
-        <select class="player"></select>
-    </div>
+<div id="timer">04:00</div>
 
-    <div class="line">
-        <select class="player"></select>
-        <select class="player"></select>
-        <select class="player"></select>
-    </div>
+<div class="scoreboard">
+    <div>🔴 الأحمر: <span id="redScore">0</span></div>
+    <div>🔵 الأزرق: <span id="blueScore">0</span></div>
+</div>
 
-    <div class="line">
-        <select class="player"></select>
-        <select class="player"></select>
-        <select class="player"></select>
-        <select class="player"></select>
-    </div>
+<div class="points">
+    <div>نقط الأحمر: <span id="redPoints">0</span></div>
+    <div>نقط الأزرق: <span id="bluePoints">0</span></div>
+</div>
 
-    <div class="line">
-        <select class="player"></select>
-    </div>
+<div class="field">
+    <div class="center-line"></div>
+    <div class="center-circle"></div>
+</div>
+
+<div class="buttons">
+    <button onclick="startMatch()">ابدأ ماتش</button>
+    <button onclick="goal('red')">جول 🔴</button>
+    <button onclick="goal('blue')">جول 🔵</button>
+    <button onclick="card('yellow')">🟨</button>
+    <button onclick="card('red')">🟥</button>
+    <button onclick="resetGame()">Reset</button>
+</div>
 
 </div>
 
-<button onclick="showTeam()">اعرض التشكيله</button>
-
-<div id="result"></div>
+<audio id="whistle" src="https://www.soundjay.com/misc/sounds/whistle-01.mp3"></audio>
+<audio id="crowd" src="https://www.soundjay.com/human/sounds/applause-8.mp3"></audio>
 
 <script src="script.js"></script>
-
 </body>
 </html>
