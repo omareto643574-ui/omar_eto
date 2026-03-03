@@ -1,20 +1,60 @@
-const positions = ["GK","RB","CB","LB","CDM","CM","CAM","RW","LW","ST"];
+body{
+    background:#0b6623;
+    text-align:center;
+    font-family:Arial;
+    color:white;
+}
 
-const selects = document.querySelectorAll(".player");
+input,button{
+    padding:8px;
+    margin:5px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+}
 
-selects.forEach(select => {
-    positions.forEach(pos => {
-        let option = document.createElement("option");
-        option.value = pos;
-        option.textContent = pos;
-        select.appendChild(option);
-    });
-});
+#timer{
+    font-size:28px;
+    margin:10px;
+    font-weight:bold;
+}
 
-function showTeam() {
-    let result = "<h2>تشكيلة OMAR Eto 🔥</h2>";
-    selects.forEach((select, index) => {
-        result += "لاعب " + (index + 1) + " : " + select.value + "<br>";
-    });
-    document.getElementById("result").innerHTML = result;
+.scoreboard, .points{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    font-size:18px;
+    margin:5px;
+}
+
+.field{
+    width:600px;
+    height:350px;
+    background:green;
+    margin:20px auto;
+    position:relative;
+    border:4px solid white;
+}
+
+.center-line{
+    position:absolute;
+    left:50%;
+    width:4px;
+    height:100%;
+    background:white;
+}
+
+.center-circle{
+    position:absolute;
+    width:120px;
+    height:120px;
+    border:4px solid white;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.buttons{
+    margin:15px;
 }
