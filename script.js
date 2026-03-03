@@ -1,60 +1,99 @@
-body{
-    background:#0b6623;
-    text-align:center;
-    font-family:Arial;
-    color:white;
+let redScore = 0;
+let blueScore = 0;
+let redPoints = 0;
+let bluePoints = 0;
+let time = 240;
+let timerInterval;
+
+// تسجيل الدخول
+function login(){
+    const user = document.getElementById("username").value.trim();
+    if(user){
+        document.getElementById("loginPage").style.display="none";
+        document.getElementById("gamePage").style.display="block";
+        document.getElementById("welcome").innerText = "أهلاً يا " + user + " 👑";
+    } else {
+        alert("اكتب اسمك أولاً!");
+    }
 }
 
-input,button{
-    padding:8px;
-    margin:5px;
-    border-radius:8px;
-    border:none;
-    cursor:pointer;
+// الضغط على Enter لتسجيل الدخول
+document.getElementById("username").addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        login();
+    }
+});
+
+// بدء الماتش
+function startMatch(){
+    document.getElementById("whistle").play();
+    document.getElementById("crowd").play();
+
+    redScore = 0;
+    blueScore = 0;
+    updateScore();
+
+    time = 240;
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(()=>{
+        if(time>0){
+            time--;
+            let m = Math.floor(time/60);
+            let s = time%60;
+            document.getElementById("timer").innerText =
+            `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
+        }else{
+            clearInterval(timerInterval);
+            endMatch();
+        }
+    },1000);
 }
 
-#timer{
-    font-size:28px;
-    margin:10px;
-    font-weight:bold;
+// تسجيل جول
+function goal(team){
+    if(team==="red") redScore++;
+    if(team==="blue") blueScore++;
+    updateScore();
 }
 
-.scoreboard, .points{
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    font-size:18px;
-    margin:5px;
+// تحديث النتيجة
+function updateScore(){
+    document.getElementById("redScore").innerText=redScore;
+    document.getElementById("blueScore").innerText=blueScore;
 }
 
-.field{
-    width:600px;
-    height:350px;
-    background:green;
-    margin:20px auto;
-    position:relative;
-    border:4px solid white;
+// انتهاء الماتش وحساب النقاط
+function endMatch(){
+    if(redScore>blueScore){
+        redPoints+=3;
+        alert("🔴 الأحمر كسب!");
+    }
+    else if(blueScore>redScore){
+        bluePoints+=3;
+        alert("🔵 الأزرق كسب!");
+    }
+    else{
+        redPoints+=1;
+        bluePoints+=1;
+        alert("تعادل 🤝");
+    }
+
+    document.getElementById("redPoints").innerText=redPoints;
+    document.getElementById("bluePoints").innerText=bluePoints;
 }
 
-.center-line{
-    position:absolute;
-    left:50%;
-    width:4px;
-    height:100%;
-    background:white;
+// كروت
+function card(type){
+    if(type==="yellow") alert("🟨 كارت أصفر!");
+    if(type==="red") alert("🟥 كارت أحمر!");
 }
 
-.center-circle{
-    position:absolute;
-    width:120px;
-    height:120px;
-    border:4px solid white;
-    border-radius:50%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-}
-
-.buttons{
-    margin:15px;
+// إعادة ضبط اللعبة
+function resetGame(){
+    clearInterval(timerInterval);
+    redScore=0;
+    blueScore=0;
+    updateScore();
+    document.getElementById("timer").innerText="04:00";
 }
