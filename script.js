@@ -1,3 +1,11 @@
+// ===== عناصر الصفحة =====
+const loginBtn = document.getElementById("loginBtn");
+const usernameInput = document.getElementById("username");
+const loginError = document.getElementById("loginError");
+const loginPage = document.getElementById("loginPage");
+const gamePage = document.getElementById("gamePage");
+const welcome = document.getElementById("welcome");
+
 let redScore = 0;
 let blueScore = 0;
 let redPoints = 0;
@@ -5,26 +13,29 @@ let bluePoints = 0;
 let time = 240;
 let timerInterval;
 
-// تسجيل الدخول
+// ===== تسجيل الدخول =====
 function login(){
-    const user = document.getElementById("username").value.trim();
-    if(user){
-        document.getElementById("loginPage").style.display="none";
-        document.getElementById("gamePage").style.display="block";
-        document.getElementById("welcome").innerText = "أهلاً يا " + user + " 👑";
-    } else {
-        alert("اكتب اسمك أولاً!");
+    const name = usernameInput.value.trim();
+    if(name.length === 0){
+        loginError.innerText = "⚠️ اكتب اسمك قبل الدخول!";
+        return;
     }
+    loginPage.style.display = "none";
+    gamePage.style.display = "block";
+    welcome.innerText = "أهلاً يا " + name + " 👑";
 }
 
-// الضغط على Enter لتسجيل الدخول
-document.getElementById("username").addEventListener("keypress", function(e){
+// الزر يشتغل
+loginBtn.addEventListener("click", login);
+
+// الضغط على Enter يشتغل كمان
+usernameInput.addEventListener("keypress", function(e){
     if(e.key === "Enter"){
         login();
     }
 });
 
-// بدء الماتش
+// ===== بدء الماتش =====
 function startMatch(){
     document.getElementById("whistle").play();
     document.getElementById("crowd").play();
@@ -50,20 +61,20 @@ function startMatch(){
     },1000);
 }
 
-// تسجيل جول
+// ===== تسجيل جول =====
 function goal(team){
     if(team==="red") redScore++;
     if(team==="blue") blueScore++;
     updateScore();
 }
 
-// تحديث النتيجة
+// ===== تحديث النتيجة =====
 function updateScore(){
     document.getElementById("redScore").innerText=redScore;
     document.getElementById("blueScore").innerText=blueScore;
 }
 
-// انتهاء الماتش وحساب النقاط
+// ===== انتهاء الماتش وحساب النقاط =====
 function endMatch(){
     if(redScore>blueScore){
         redPoints+=3;
@@ -83,13 +94,13 @@ function endMatch(){
     document.getElementById("bluePoints").innerText=bluePoints;
 }
 
-// كروت
+// ===== كروت =====
 function card(type){
     if(type==="yellow") alert("🟨 كارت أصفر!");
     if(type==="red") alert("🟥 كارت أحمر!");
 }
 
-// إعادة ضبط اللعبة
+// ===== إعادة ضبط اللعبة =====
 function resetGame(){
     clearInterval(timerInterval);
     redScore=0;
