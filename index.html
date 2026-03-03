@@ -2,33 +2,33 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>OMAR Eto</title>
+<title>OMAR Eto - AI</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- صفحة تسجيل الدخول -->
-<div id="loginPage">
-  <h1>🔥 OMAR Eto 🔥</h1>
-  <input type="text" id="username" placeholder="اكتب اسمك هنا">
-  <button id="loginBtn">دخول</button>
-  <p id="loginError" style="color:red;"></p>
+<h1>🔥 OMAR Eto - لعب ضد AI 🔥</h1>
+
+<div id="timer">04:00</div>
+
+<div class="scoreboard">
+  <div>🔴 أنت: <span id="playerScore">0</span></div>
+  <div>🔵 AI: <span id="aiScore">0</span></div>
 </div>
 
-<!-- صفحة اللعبة -->
-<div id="gamePage" style="display:none;">
-  <h2 id="welcome"></h2>
+<div class="field" id="field">
+  <div class="goal goal-left"></div>
+  <div class="goal goal-right"></div>
+  <div class="player" id="player"></div>
+  <div class="ai" id="ai"></div>
+  <div class="ball" id="ball"></div>
+</div>
 
-  <div id="timer">04:00</div>
+<div class="buttons">
+  <button onclick="startMatch()">ابدأ ماتش</button>
+  <button onclick="resetGame()">Reset</button>
+</div>
 
-  <div class="scoreboard">
-    <div>🔴 الأحمر: <span id="redScore">0</span></div>
-    <div>🔵 الأزرق: <span id="blueScore">0</span></div>
-  </div>
-
-  <div class="points">
-    <div>نقط الأحمر: <span id="redPoints">0</span></div>
-    <div>نقط الأزرق: <span id="bluePoints">0</span></div>
-  </div>
-
-  <
+<script src="script.js"></script>
+</body>
+</html>
